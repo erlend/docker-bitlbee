@@ -1,17 +1,15 @@
 FROM debian:jessie
 
-RUN apt-get update && apt-get install -y curl
-
 COPY sources.list /etc/apt/sources.list.d/bitlbee.list
 COPY entrypoint.sh /entrypoint.sh
 
-# Install bitlbee
-RUN (curl -L https://jgeboski.github.io/obs.key          | apt-key add -) && \
+RUN apt-get update -q && \
+    apt-get install -y curl && \
+    (curl -L https://jgeboski.github.io/obs.key          | apt-key add -) && \
     (curl -L https://code.bitlbee.org/debian/release.key | apt-key add -) && \
-    apt-get update && \
+    apt-get update -q && \
     apt-get install -y bitlbee-facebook && \
-    apt-get purge -y curl && \
-    apt-get autoremove --purge -y && \
+    apt-get autoremove --purge -y curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Configure bitlbee
