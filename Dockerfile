@@ -8,7 +8,7 @@ RUN apt-get update -q && \
     (curl -L https://jgeboski.github.io/obs.key          | apt-key add -) && \
     (curl -L https://code.bitlbee.org/debian/release.key | apt-key add -) && \
     apt-get update -q && \
-    apt-get install -y bitlbee-facebook && \
+    apt-get install -y bitlbee-facebook bitlbee-libpurple && \
     apt-get autoremove --purge -y curl && \
     rm -rf /var/lib/apt/lists/*
 
